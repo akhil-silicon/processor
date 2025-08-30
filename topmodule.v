@@ -28,11 +28,11 @@ reg [31:0] mul_temp ;
 always @ (*)
     begin
         case(`oper)
-        movsgpr: begin 
+        `movsgpr: begin 
             GPR[`rdst]=SGPR ;
         end
         
-        mov: begin
+        `mov: begin
             if(`mode)
                 begin
                     GPR[`rdst]=`imm_data ;
@@ -43,7 +43,7 @@ always @ (*)
                 end    
         end
         
-        add: begin
+        `add: begin
             if(`mode)
                 begin
                     GPR[`rdst]=GPR[`rsrc1] +`imm_data ;
@@ -55,7 +55,7 @@ always @ (*)
         
         end
         
-         sub: begin
+         `sub: begin
             if(`mode)
                 begin
                     GPR[`rdst]=GPR[`rsrc1] - `imm_data ;
@@ -67,7 +67,7 @@ always @ (*)
         
         end
         
-        mul: begin
+        `mul: begin
             if(`mode)
                 begin
                     {SGPR,GPR[`rdst]}=GPR[`rsrc1] * `imm_data ;
@@ -78,6 +78,7 @@ always @ (*)
                 end  
         
         end
+       endcase
     end
 
 
